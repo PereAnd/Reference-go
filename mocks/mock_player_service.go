@@ -10,6 +10,7 @@
 package mocks
 
 import (
+	context "context"
 	reflect "reflect"
 
 	domain "github.com/jairogloz/go-l/pkg/domain"
@@ -20,6 +21,7 @@ import (
 type MockPlayerService struct {
 	ctrl     *gomock.Controller
 	recorder *MockPlayerServiceMockRecorder
+	isgomock struct{}
 }
 
 // MockPlayerServiceMockRecorder is the mock recorder for MockPlayerService.
@@ -40,44 +42,44 @@ func (m *MockPlayerService) EXPECT() *MockPlayerServiceMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockPlayerService) Create(arg0 *domain.Player) error {
+func (m *MockPlayerService) Create(ctx context.Context, player *domain.Player) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Create", arg0)
+	ret := m.ctrl.Call(m, "Create", ctx, player)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Create indicates an expected call of Create.
-func (mr *MockPlayerServiceMockRecorder) Create(arg0 any) *gomock.Call {
+func (mr *MockPlayerServiceMockRecorder) Create(ctx, player any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockPlayerService)(nil).Create), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockPlayerService)(nil).Create), ctx, player)
 }
 
 // Delete mocks base method.
-func (m *MockPlayerService) Delete(arg0 string) error {
+func (m *MockPlayerService) Delete(ctx context.Context, id string) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Delete", arg0)
+	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Delete indicates an expected call of Delete.
-func (mr *MockPlayerServiceMockRecorder) Delete(arg0 any) *gomock.Call {
+func (mr *MockPlayerServiceMockRecorder) Delete(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockPlayerService)(nil).Delete), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockPlayerService)(nil).Delete), ctx, id)
 }
 
 // Get mocks base method.
-func (m *MockPlayerService) Get(arg0 string) (*domain.Player, error) {
+func (m *MockPlayerService) Get(ctx context.Context, id string) (*domain.Player, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Get", arg0)
+	ret := m.ctrl.Call(m, "Get", ctx, id)
 	ret0, _ := ret[0].(*domain.Player)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // Get indicates an expected call of Get.
-func (mr *MockPlayerServiceMockRecorder) Get(arg0 any) *gomock.Call {
+func (mr *MockPlayerServiceMockRecorder) Get(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockPlayerService)(nil).Get), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockPlayerService)(nil).Get), ctx, id)
 }

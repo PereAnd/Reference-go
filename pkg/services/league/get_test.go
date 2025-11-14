@@ -1,6 +1,7 @@
 package league_test
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -30,7 +31,7 @@ func TestService_Get(t *testing.T) {
 		},
 		"not found error": {
 			setup: func(mockRepo *mocks.MockLeagueRepository) {
-				mockRepo.EXPECT().Get("america cup").Return(nil /*league*/, domain.ErrNotFound)
+				mockRepo.EXPECT().Get(gomock.Any(), "america cup").Return(nil /*league*/, domain.ErrNotFound)
 			},
 			leagueId: "america cup",
 			assertionFunc: func(subTest *testing.T, p *domain.League, err error) {
@@ -48,7 +49,7 @@ func TestService_Get(t *testing.T) {
 
 		"timeout error": {
 			setup: func(mockRepo *mocks.MockLeagueRepository) {
-				mockRepo.EXPECT().Get("america cup").Return(nil /*player*/, domain.ErrTimeout)
+				mockRepo.EXPECT().Get(gomock.Any(), "america cup").Return(nil /*player*/, domain.ErrTimeout)
 			},
 			leagueId: "america cup",
 			assertionFunc: func(subTest *testing.T, p *domain.League, err error) {
@@ -66,7 +67,7 @@ func TestService_Get(t *testing.T) {
 
 		"generic error": {
 			setup: func(mockRepo *mocks.MockLeagueRepository) {
-				mockRepo.EXPECT().Get("america cup").Return(nil /*player*/, errors.New("generic error"))
+				mockRepo.EXPECT().Get(gomock.Any(), "america cup").Return(nil /*player*/, errors.New("generic error"))
 			},
 			leagueId: "america cup",
 			assertionFunc: func(subTest *testing.T, p *domain.League, err error) {
@@ -78,7 +79,7 @@ func TestService_Get(t *testing.T) {
 
 		"success": {
 			setup: func(mockRepo *mocks.MockLeagueRepository) {
-				mockRepo.EXPECT().Get("america cup").Return(&domain.League{ID: "america cup"}, nil)
+				mockRepo.EXPECT().Get(gomock.Any(), "america cup").Return(&domain.League{ID: "america cup"}, nil)
 			},
 			leagueId: "america cup",
 			assertionFunc: func(subTest *testing.T, p *domain.League, err error) {
@@ -103,7 +104,7 @@ func TestService_Get(t *testing.T) {
 
 			test.setup(mockLeagueRepo)
 
-			p, err := s.Get(test.leagueId)
+			p, err := s.Get(context.Background(), test.leagueId)
 
 			test.assertionFunc(subTest, p, err)
 

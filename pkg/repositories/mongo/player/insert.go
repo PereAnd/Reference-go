@@ -3,17 +3,18 @@ package player
 import (
 	"context"
 	"fmt"
+	"log"
+
 	"github.com/jairogloz/go-l/pkg/domain"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	"log"
 )
 
-func (r *Repository) Insert(player *domain.Player) (err error) {
+func (r *Repository) Insert(ctx context.Context, player *domain.Player) (err error) {
 
 	player.ID = primitive.NewObjectID()
 
-	_, err = r.Collection.InsertOne(context.Background(), player)
+	_, err = r.Collection.InsertOne(ctx, player)
 	if err != nil {
 		if mongo.IsDuplicateKeyError(err) {
 			log.Println("Duplicate key error")

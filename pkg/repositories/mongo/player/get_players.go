@@ -9,15 +9,15 @@ import (
 )
 
 // GetPlayersByTeamID retrieves all players from the MongoDB collection that belong to a team with the provided team ID.
-func (r *Repository) GetPlayersByTeamID(teamID string) ([]*domain.Player, error) {
-	cursor, err := r.Collection.Find(context.Background(), bson.M{"team_info.team_id": teamID})
+func (r *Repository) GetPlayersByTeamID(ctx context.Context, teamID string) ([]*domain.Player, error) {
+	cursor, err := r.Collection.Find(ctx, bson.M{"team_info.team_id": teamID})
 	if err != nil {
 		return nil, fmt.Errorf("error getting players: %w", err)
 	}
-	defer cursor.Close(context.Background())
+	defer cursor.Close(ctx)
 
 	var players []*domain.Player
-	for cursor.Next(context.Background()) {
+	for cursor.Next(ctx) {
 		var player domain.Player
 		err := cursor.Decode(&player)
 		if err != nil {

@@ -17,7 +17,7 @@ import (
 // @Router /players/:id [get]
 func (h Handler) GetPlayer(c *gin.Context) {
 	playerIdParam := c.Param("id")
-	player, err := h.PlayerService.Get(playerIdParam)
+	player, err := h.PlayerService.Get(c.Request.Context(), playerIdParam)
 	if err != nil {
 		core.RespondError(c, err)
 		return

@@ -1,16 +1,20 @@
 package ports
 
-import "github.com/jairogloz/go-l/pkg/domain"
+import (
+	"context"
+
+	"github.com/jairogloz/go-l/pkg/domain"
+)
 
 type PlayerService interface {
-	Create(player *domain.Player) (err error)
-	Get(id string) (player *domain.Player, err error)
-	Delete(id string) (err error)
+	Create(ctx context.Context, player *domain.Player) (err error)
+	Get(ctx context.Context, id string) (player *domain.Player, err error)
+	Delete(ctx context.Context, id string) (err error)
 }
 
 type PlayerRepository interface {
-	Insert(player *domain.Player) (err error)
-	Get(id string) (player *domain.Player, err error)
-	GetPlayersByTeamID(id string) (players []*domain.Player, err error)
-	Delete(id string) (err error)
+	Insert(ctx context.Context, player *domain.Player) (err error)
+	Get(ctx context.Context, id string) (player *domain.Player, err error)
+	GetPlayersByTeamID(ctx context.Context, id string) (players []*domain.Player, err error)
+	Delete(ctx context.Context, id string) (err error)
 }

@@ -3,15 +3,16 @@ package player_test
 import (
 	"bytes"
 	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jairogloz/go-l/cmd/api/handlers/player"
 	"github.com/jairogloz/go-l/mocks"
 	"github.com/jairogloz/go-l/pkg/domain"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
-	"net/http"
-	"net/http/httptest"
-	"testing"
 )
 
 func TestHandler_CreatePlayer(t *testing.T) {
@@ -46,7 +47,7 @@ func TestHandler_CreatePlayer(t *testing.T) {
 				}
 			}`,
 			setup: func(playerServiceMock *mocks.MockPlayerService) {
-				playerServiceMock.EXPECT().Create(gomock.Any()).Return(nil)
+				playerServiceMock.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)
 			},
 			assertionFunc: func(t *testing.T, w *httptest.ResponseRecorder) {
 				assert.Equal(t, 200, w.Code)
@@ -75,7 +76,7 @@ func TestHandler_CreatePlayer(t *testing.T) {
 				}
 			}`,
 			setup: func(playerServiceMock *mocks.MockPlayerService) {
-				playerServiceMock.EXPECT().Create(gomock.Any()).Return(domain.NewAppError(domain.ErrCodeDuplicateKey, "duplicate key"))
+				playerServiceMock.EXPECT().Create(gomock.Any(), gomock.Any()).Return(domain.NewAppError(domain.ErrCodeDuplicateKey, "duplicate key"))
 			},
 			assertionFunc: func(t *testing.T, w *httptest.ResponseRecorder) {
 				assert.Equal(t, 409, w.Code)

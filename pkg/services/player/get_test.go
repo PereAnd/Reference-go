@@ -1,6 +1,7 @@
 package player_test
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -31,7 +32,7 @@ func TestService_Get(t *testing.T) {
 		},
 		"not found error": {
 			setup: func(mockRepo *mocks.MockPlayerRepository) {
-				mockRepo.EXPECT().Get("abc").Return(nil /*player*/, domain.ErrNotFound)
+				mockRepo.EXPECT().Get(gomock.Any(), "abc").Return(nil /*player*/, domain.ErrNotFound)
 			},
 			playerId: "abc",
 			assertionFunc: func(subTest *testing.T, p *domain.Player, err error) {
@@ -49,7 +50,7 @@ func TestService_Get(t *testing.T) {
 
 		"timeout error": {
 			setup: func(mockRepo *mocks.MockPlayerRepository) {
-				mockRepo.EXPECT().Get("abc").Return(nil /*player*/, domain.ErrTimeout)
+				mockRepo.EXPECT().Get(gomock.Any(), "abc").Return(nil /*player*/, domain.ErrTimeout)
 			},
 			playerId: "abc",
 			assertionFunc: func(subTest *testing.T, p *domain.Player, err error) {
@@ -67,7 +68,7 @@ func TestService_Get(t *testing.T) {
 
 		"generic error": {
 			setup: func(mockRepo *mocks.MockPlayerRepository) {
-				mockRepo.EXPECT().Get("abc").Return(nil /*player*/, errors.New("generic error"))
+				mockRepo.EXPECT().Get(gomock.Any(), "abc").Return(nil /*player*/, errors.New("generic error"))
 			},
 			playerId: "abc",
 			assertionFunc: func(subTest *testing.T, p *domain.Player, err error) {
@@ -79,7 +80,7 @@ func TestService_Get(t *testing.T) {
 
 		"success": {
 			setup: func(mockRepo *mocks.MockPlayerRepository) {
-				mockRepo.EXPECT().Get("abc").Return(&domain.Player{ID: "abc"}, nil)
+				mockRepo.EXPECT().Get(gomock.Any(), "abc").Return(&domain.Player{ID: "abc"}, nil)
 			},
 			playerId: "abc",
 			assertionFunc: func(subTest *testing.T, p *domain.Player, err error) {
@@ -104,7 +105,7 @@ func TestService_Get(t *testing.T) {
 
 			test.setup(mockPlayerRepo)
 
-			p, err := s.Get(test.playerId)
+			p, err := s.Get(context.Background(), test.playerId)
 
 			test.assertionFunc(subTest, p, err)
 

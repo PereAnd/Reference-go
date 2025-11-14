@@ -21,7 +21,7 @@ import (
 func (h Handler) DeletePlayer(c *gin.Context) {
 	id := c.Param("id")
 
-	err := h.PlayerService.Delete(id)
+	err := h.PlayerService.Delete(c.Request.Context(), id)
 	if err != nil {
 		core.RespondError(c, err)
 		return

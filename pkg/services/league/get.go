@@ -1,6 +1,7 @@
 package league
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"log"
@@ -14,13 +15,13 @@ import (
 // If the league is not found in the repository, it returns a domain-specific not found error.
 // If there is a timeout error when accessing the repository, it returns a domain-specific timeout error.
 // For any other errors, it logs the error and returns a generic error.
-func (s *Service) Get(id string) (league *domain.League, err error) {
+func (s *Service) Get(ctx context.Context, id string) (league *domain.League, err error) {
 
 	if id == "" {
 		return nil, errors.New("id is required")
 	}
 
-	league, err = s.Repo.Get(id)
+	league, err = s.Repo.Get(ctx, id)
 	if err != nil {
 		if errors.Is(err, domain.ErrNotFound) {
 			return nil, domain.NewAppError(

@@ -21,6 +21,7 @@ import (
 type MockLeagueRepository struct {
 	ctrl     *gomock.Controller
 	recorder *MockLeagueRepositoryMockRecorder
+	isgomock struct{}
 }
 
 // MockLeagueRepositoryMockRecorder is the mock recorder for MockLeagueRepository.
@@ -41,44 +42,44 @@ func (m *MockLeagueRepository) EXPECT() *MockLeagueRepositoryMockRecorder {
 }
 
 // Delete mocks base method.
-func (m *MockLeagueRepository) Delete(arg0 string) error {
+func (m *MockLeagueRepository) Delete(ctx context.Context, id string) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Delete", arg0)
+	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Delete indicates an expected call of Delete.
-func (mr *MockLeagueRepositoryMockRecorder) Delete(arg0 any) *gomock.Call {
+func (mr *MockLeagueRepositoryMockRecorder) Delete(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockLeagueRepository)(nil).Delete), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockLeagueRepository)(nil).Delete), ctx, id)
 }
 
 // Get mocks base method.
-func (m *MockLeagueRepository) Get(arg0 string) (*domain.League, error) {
+func (m *MockLeagueRepository) Get(ctx context.Context, id string) (*domain.League, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Get", arg0)
+	ret := m.ctrl.Call(m, "Get", ctx, id)
 	ret0, _ := ret[0].(*domain.League)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // Get indicates an expected call of Get.
-func (mr *MockLeagueRepositoryMockRecorder) Get(arg0 any) *gomock.Call {
+func (mr *MockLeagueRepositoryMockRecorder) Get(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockLeagueRepository)(nil).Get), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockLeagueRepository)(nil).Get), ctx, id)
 }
 
 // Insert mocks base method.
-func (m *MockLeagueRepository) Insert(arg0 context.Context, arg1 *domain.League) error {
+func (m *MockLeagueRepository) Insert(ctx context.Context, league *domain.League) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Insert", arg0, arg1)
+	ret := m.ctrl.Call(m, "Insert", ctx, league)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Insert indicates an expected call of Insert.
-func (mr *MockLeagueRepositoryMockRecorder) Insert(arg0, arg1 any) *gomock.Call {
+func (mr *MockLeagueRepositoryMockRecorder) Insert(ctx, league any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Insert", reflect.TypeOf((*MockLeagueRepository)(nil).Insert), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Insert", reflect.TypeOf((*MockLeagueRepository)(nil).Insert), ctx, league)
 }

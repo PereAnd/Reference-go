@@ -17,7 +17,7 @@ import (
 // @Router /league/:id [get]
 func (h Handler) GetLeague(c *gin.Context) {
 	leagueIdParam := c.Param("id")
-	player, err := h.LeagueService.Get(leagueIdParam)
+	player, err := h.LeagueService.Get(c.Request.Context(), leagueIdParam)
 	if err != nil {
 		core.RespondError(c, err)
 		return

@@ -1,6 +1,7 @@
 package league_test
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -30,7 +31,7 @@ func TestService_Delete(t *testing.T) {
 		},
 		"not found error": {
 			setup: func(mockRepo *mocks.MockLeagueRepository) {
-				mockRepo.EXPECT().Delete("abc").Return(domain.ErrNotFound)
+				mockRepo.EXPECT().Delete(gomock.Any(), "abc").Return(domain.ErrNotFound)
 			},
 			leagueId: "abc",
 			assertionFunc: func(subTest *testing.T, err error) {
@@ -46,7 +47,7 @@ func TestService_Delete(t *testing.T) {
 		},
 		"generic error": {
 			setup: func(mockRepo *mocks.MockLeagueRepository) {
-				mockRepo.EXPECT().Delete("abc").Return(errors.New("generic error"))
+				mockRepo.EXPECT().Delete(gomock.Any(), "abc").Return(errors.New("generic error"))
 			},
 			leagueId: "abc",
 			assertionFunc: func(subTest *testing.T, err error) {
@@ -56,7 +57,7 @@ func TestService_Delete(t *testing.T) {
 		},
 		"success": {
 			setup: func(mockRepo *mocks.MockLeagueRepository) {
-				mockRepo.EXPECT().Delete("abc").Return(nil)
+				mockRepo.EXPECT().Delete(gomock.Any(), "abc").Return(nil)
 			},
 			leagueId: "abc",
 			assertionFunc: func(subTest *testing.T, err error) {
@@ -79,7 +80,7 @@ func TestService_Delete(t *testing.T) {
 
 			test.setup(mockLeagueRepo)
 
-			err := s.Delete(test.leagueId)
+			err := s.Delete(context.Background(), test.leagueId)
 
 			test.assertionFunc(subTest, err)
 

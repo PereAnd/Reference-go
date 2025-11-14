@@ -30,7 +30,7 @@ func (h Handler) CreatePlayer(c *gin.Context) {
 		LastName:    playerCreateParams.LastName,
 		TeamInfo:    playerCreateParams.TeamInfo,
 	}
-	err := h.PlayerService.Create(player)
+	err := h.PlayerService.Create(c.Request.Context(), player)
 	if err != nil {
 		core.RespondError(c, err)
 		return

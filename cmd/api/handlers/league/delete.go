@@ -21,7 +21,7 @@ import (
 func (h Handler) DeleteLeague(c *gin.Context) {
 	id := c.Param("id")
 
-	err := h.LeagueService.Delete(id)
+	err := h.LeagueService.Delete(c.Request.Context(), id)
 	if err != nil {
 		core.RespondError(c, err)
 		return

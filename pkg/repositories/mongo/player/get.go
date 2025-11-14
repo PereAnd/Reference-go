@@ -20,13 +20,13 @@ import (
 // If there is a timeout error when accessing the MongoDB collection, it returns a domain-specific timeout error.
 // For any other errors, it returns the error as is.
 // If it successfully finds and decodes a document, it sets the ID of the domain.Player object to the hex string representation of the ObjectID and returns the domain.Player object.
-func (r *Repository) Get(id string) (player *domain.Player, err error) {
+func (r *Repository) Get(ctx context.Context, id string) (player *domain.Player, err error) {
 	playerID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		return nil, fmt.Errorf("invalid id: %w", err)
 	}
 
-	err = r.Collection.FindOne(context.Background(), bson.M{"_id": playerID}).Decode(&player)
+	err = r.Collection.FindOne(ctx, bson.M{"_id": playerID}).Decode(&player)
 	if err != nil {
 		if errors.Is(err, mongo.ErrNoDocuments) {
 			return nil, domain.ErrNotFound

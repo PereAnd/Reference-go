@@ -10,6 +10,7 @@
 package mocks
 
 import (
+	context "context"
 	reflect "reflect"
 
 	domain "github.com/jairogloz/go-l/pkg/domain"
@@ -20,6 +21,7 @@ import (
 type MockPlayerRepository struct {
 	ctrl     *gomock.Controller
 	recorder *MockPlayerRepositoryMockRecorder
+	isgomock struct{}
 }
 
 // MockPlayerRepositoryMockRecorder is the mock recorder for MockPlayerRepository.
@@ -40,59 +42,59 @@ func (m *MockPlayerRepository) EXPECT() *MockPlayerRepositoryMockRecorder {
 }
 
 // Delete mocks base method.
-func (m *MockPlayerRepository) Delete(arg0 string) error {
+func (m *MockPlayerRepository) Delete(ctx context.Context, id string) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Delete", arg0)
+	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Delete indicates an expected call of Delete.
-func (mr *MockPlayerRepositoryMockRecorder) Delete(arg0 any) *gomock.Call {
+func (mr *MockPlayerRepositoryMockRecorder) Delete(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockPlayerRepository)(nil).Delete), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockPlayerRepository)(nil).Delete), ctx, id)
 }
 
 // Get mocks base method.
-func (m *MockPlayerRepository) Get(arg0 string) (*domain.Player, error) {
+func (m *MockPlayerRepository) Get(ctx context.Context, id string) (*domain.Player, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Get", arg0)
+	ret := m.ctrl.Call(m, "Get", ctx, id)
 	ret0, _ := ret[0].(*domain.Player)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // Get indicates an expected call of Get.
-func (mr *MockPlayerRepositoryMockRecorder) Get(arg0 any) *gomock.Call {
+func (mr *MockPlayerRepositoryMockRecorder) Get(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockPlayerRepository)(nil).Get), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockPlayerRepository)(nil).Get), ctx, id)
 }
 
 // GetPlayersByTeamID mocks base method.
-func (m *MockPlayerRepository) GetPlayersByTeamID(arg0 string) ([]*domain.Player, error) {
+func (m *MockPlayerRepository) GetPlayersByTeamID(ctx context.Context, id string) ([]*domain.Player, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetPlayersByTeamID", arg0)
+	ret := m.ctrl.Call(m, "GetPlayersByTeamID", ctx, id)
 	ret0, _ := ret[0].([]*domain.Player)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetPlayersByTeamID indicates an expected call of GetPlayersByTeamID.
-func (mr *MockPlayerRepositoryMockRecorder) GetPlayersByTeamID(arg0 any) *gomock.Call {
+func (mr *MockPlayerRepositoryMockRecorder) GetPlayersByTeamID(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPlayersByTeamID", reflect.TypeOf((*MockPlayerRepository)(nil).GetPlayersByTeamID), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPlayersByTeamID", reflect.TypeOf((*MockPlayerRepository)(nil).GetPlayersByTeamID), ctx, id)
 }
 
 // Insert mocks base method.
-func (m *MockPlayerRepository) Insert(arg0 *domain.Player) error {
+func (m *MockPlayerRepository) Insert(ctx context.Context, player *domain.Player) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Insert", arg0)
+	ret := m.ctrl.Call(m, "Insert", ctx, player)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Insert indicates an expected call of Insert.
-func (mr *MockPlayerRepositoryMockRecorder) Insert(arg0 any) *gomock.Call {
+func (mr *MockPlayerRepositoryMockRecorder) Insert(ctx, player any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Insert", reflect.TypeOf((*MockPlayerRepository)(nil).Insert), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Insert", reflect.TypeOf((*MockPlayerRepository)(nil).Insert), ctx, player)
 }

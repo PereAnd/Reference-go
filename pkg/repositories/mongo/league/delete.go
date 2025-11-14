@@ -15,7 +15,7 @@ var (
 )
 
 // Delete deletes a league by id from the database
-func (r *Repository) Delete(id string) (err error) {
+func (r *Repository) Delete(ctx context.Context, id string) (err error) {
 
 	leagueID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
@@ -24,7 +24,7 @@ func (r *Repository) Delete(id string) (err error) {
 	}
 
 	collection := r.Client.Database("go-l").Collection("leagues")
-	deleteResult, err := collection.DeleteOne(context.TODO(), bson.M{"_id": leagueID})
+	deleteResult, err := collection.DeleteOne(ctx, bson.M{"_id": leagueID})
 
 	if err != nil {
 		slog.Error("deleting league: ", slog.Any("mongodb", err))

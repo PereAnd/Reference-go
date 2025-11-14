@@ -1,11 +1,13 @@
 package player
 
 import (
+	"context"
 	"errors"
 	"fmt"
-	"github.com/jairogloz/go-l/pkg/domain"
 	"log"
 	"time"
+
+	"github.com/jairogloz/go-l/pkg/domain"
 )
 
 // Create is a method of the Service struct that creates a new player in the database.
@@ -21,11 +23,11 @@ import (
 //
 // Return values:
 //   - err: An error that will be nil if the Player was successfully created. If there was an error, it will be an error object describing the failure.
-func (s *Service) Create(player *domain.Player) (err error) {
+func (s *Service) Create(ctx context.Context, player *domain.Player) (err error) {
 	now := time.Now().UTC()
 	player.CreatedAt = &now
 
-	err = s.Repo.Insert(player)
+	err = s.Repo.Insert(ctx, player)
 	if err != nil {
 		if errors.Is(err, domain.ErrDuplicateKey) {
 			log.Println("Duplicate key error")

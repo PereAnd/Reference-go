@@ -2,15 +2,16 @@ package league_test
 
 import (
 	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jairogloz/go-l/cmd/api/handlers/league"
 	"github.com/jairogloz/go-l/mocks"
 	"github.com/jairogloz/go-l/pkg/domain"
 	"github.com/stretchr/testify/assert"
-	"github.com/golang/mock/gomock"
-	"net/http"
-	"net/http/httptest"
-	"testing"
+	"go.uber.org/mock/gomock"
 )
 
 func TestHandler_DeleteLeague(t *testing.T) {
@@ -22,7 +23,7 @@ func TestHandler_DeleteLeague(t *testing.T) {
 		"invalid id": {
 			leagueID: "invalid-id",
 			setup: func(leagueServiceMock *mocks.MockLeagueService) {
-				leagueServiceMock.EXPECT().Delete("invalid-id").Return(domain.NewAppError(domain.ErrCodeInvalidParams, "invalid id"))
+				leagueServiceMock.EXPECT().Delete(gomock.Any(), "invalid-id").Return(domain.NewAppError(domain.ErrCodeInvalidParams, "invalid id"))
 			},
 			assertionFunc: func(t *testing.T, w *httptest.ResponseRecorder) {
 				assert.Equal(t, 400, w.Code)
@@ -38,7 +39,7 @@ func TestHandler_DeleteLeague(t *testing.T) {
 		"success": {
 			leagueID: "valid-id",
 			setup: func(leagueServiceMock *mocks.MockLeagueService) {
-				leagueServiceMock.EXPECT().Delete("valid-id").Return(nil)
+				leagueServiceMock.EXPECT().Delete(gomock.Any(), "valid-id").Return(nil)
 			},
 			assertionFunc: func(t *testing.T, w *httptest.ResponseRecorder) {
 				assert.Equal(t, 200, w.Code)
@@ -48,7 +49,7 @@ func TestHandler_DeleteLeague(t *testing.T) {
 		"league not found": {
 			leagueID: "not-found-id",
 			setup: func(leagueServiceMock *mocks.MockLeagueService) {
-				leagueServiceMock.EXPECT().Delete("not-found-id").Return(domain.NewAppError(domain.ErrCodeNotFound, "league not found"))
+				leagueServiceMock.EXPECT().Delete(gomock.Any(), "not-found-id").Return(domain.NewAppError(domain.ErrCodeNotFound, "league not found"))
 			},
 			assertionFunc: func(t *testing.T, w *httptest.ResponseRecorder) {
 				assert.Equal(t, 404, w.Code)

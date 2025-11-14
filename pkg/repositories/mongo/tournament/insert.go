@@ -15,7 +15,7 @@ import (
 func (r *Repository) Insert(ctx context.Context, tournament *domain.Tournament) (err error) {
 	tournament.ID = primitive.NewObjectID()
 
-	_, err = r.Collection.InsertOne(context.Background(), tournament)
+	_, err = r.Collection.InsertOne(ctx, tournament)
 	if err != nil {
 		if mongo.IsDuplicateKeyError(err) {
 			log.Println("Duplicate key error")
