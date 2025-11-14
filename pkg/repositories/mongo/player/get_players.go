@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-// GetPlayersByTeamID retrieves all players from the MongoDB collection that belong to a team with the provided team ID.
+// GetPlayersByTeamID obtiene todos los jugadores de la colección de MongoDB que pertenecen a un equipo con el ID de equipo proporcionado.
 func (r *Repository) GetPlayersByTeamID(ctx context.Context, teamID string) ([]*domain.Player, error) {
 	cursor, err := r.Collection.Find(ctx, bson.M{"team_info.team_id": teamID})
 	if err != nil {

@@ -11,15 +11,16 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-// Get retrieves a player from the MongoDB collection by their ID.
-// It first converts the provided string ID to a MongoDB ObjectID.
-// If the conversion fails (e.g., if the ID is not a valid hex string), it returns an error.
-// It then attempts to find a document in the MongoDB collection with the converted ObjectID.
-// If it finds a document, it decodes it into a domain.Player object.
-// If it doesn't find a document, it returns a domain-specific not found error.
-// If there is a timeout error when accessing the MongoDB collection, it returns a domain-specific timeout error.
-// For any other errors, it returns the error as is.
-// If it successfully finds and decodes a document, it sets the ID of the domain.Player object to the hex string representation of the ObjectID and returns the domain.Player object.
+// Get obtiene un jugador de la colección de MongoDB por su ID.
+// Primero convierte el ID de cadena proporcionado a un ObjectID de MongoDB.
+// Si la conversión falla (ej., si el ID no es una cadena hexadecimal válida), retorna un error.
+// Luego intenta encontrar un documento en la colección de MongoDB con el ObjectID convertido.
+// Si encuentra un documento, lo decodifica en un objeto domain.Player.
+// Si no encuentra un documento, retorna un error específico del dominio de no encontrado.
+// Si hay un error de timeout al acceder a la colección de MongoDB, retorna un error específico del dominio de timeout.
+// Para cualquier otro error, retorna el error tal cual.
+// Si encuentra y decodifica exitosamente un documento, establece el ID del objeto domain.Player
+// a la representación hexadecimal del ObjectID y retorna el objeto domain.Player.
 func (r *Repository) Get(ctx context.Context, id string) (player *domain.Player, err error) {
 	playerID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {

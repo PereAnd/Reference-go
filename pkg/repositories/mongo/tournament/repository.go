@@ -1,3 +1,7 @@
+// Package tournament proporciona la implementación del repositorio MongoDB para persistencia de torneos.
+// Este paquete implementa la interfaz TournamentRepository, sirviendo como un adaptador conducido
+// (salida) en la arquitectura hexagonal. Maneja todas las operaciones específicas de MongoDB
+// para entidades de torneos, traduciendo entre modelos de dominio y documentos de base de datos.
 package tournament
 
 import (
@@ -6,12 +10,15 @@ import (
 	"github.com/jairogloz/go-l/pkg/ports"
 )
 
-// Make sure Repository implements ports.TournamentRepository
-// at compile time
+// Asegura que Repository implementa ports.TournamentRepository en tiempo de compilación.
 var _ ports.TournamentRepository = &Repository{}
 
-// Repository is a struct that represents the repository for the tournament entity.
+// Repository implementa la interfaz TournamentRepository usando MongoDB como mecanismo de persistencia.
+// Proporciona métodos para insertar, recuperar y eliminar documentos de torneos en MongoDB.
 type Repository struct {
-	Client     *mongo.Client
+	// Client es el cliente de MongoDB usado para operaciones de base de datos.
+	Client *mongo.Client
+
+	// Collection es la colección de MongoDB donde se almacenan los documentos de torneos.
 	Collection *mongo.Collection
 }

@@ -7,7 +7,7 @@ import (
 	"github.com/jairogloz/go-l/pkg/domain"
 )
 
-// Delete league by id
+// Delete elimina una liga por su ID.
 func (s *Service) Delete(ctx context.Context, id string) (err error) {
     if id == "" {
         return errors.New("id is required")

@@ -6,7 +6,7 @@ import (
 	"github.com/jairogloz/go-l/pkg/domain"
 )
 
-// Delete player by id
+// Delete elimina un jugador por su ID.
 func (s *Service) Delete(ctx context.Context, id string) (err error) {
 	err = s.Repo.Delete(ctx, id)
 	if err != nil {

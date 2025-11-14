@@ -2,7 +2,7 @@ package domain
 
 import "time"
 
-// Player represents a player in the domain.
+// Player representa un jugador en el dominio.
 type Player struct {
 	ContactInfo *ContactInfo `json:"contact_info" bson:"contact_info"`
 	CreatedAt   *time.Time   `json:"created_at" bson:"created_at"`

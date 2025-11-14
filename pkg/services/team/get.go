@@ -6,7 +6,7 @@ import (
 	"github.com/jairogloz/go-l/pkg/domain"
 )
 
-// Get retrieves a team from the database, or returns an error if something goes wrong.
+// Get obtiene un equipo de la base de datos, o retorna un error si algo sale mal.
 func (s Service) Get(ctx context.Context, id string) (team *domain.Team, err error) {
 	team, err = s.Repo.Get(ctx, id)
 

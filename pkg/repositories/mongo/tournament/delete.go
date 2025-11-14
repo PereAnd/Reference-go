@@ -10,7 +10,7 @@ import (
 	"github.com/jairogloz/go-l/pkg/domain"
 )
 
-// Delete deletes a tournament by id from db
+// Delete elimina un torneo por su ID de la base de datos.
 func (r *Repository) Delete(ctx context.Context, id string) (err error) {
 	oid, err := primitive.ObjectIDFromHex(id)
 	if err != nil {

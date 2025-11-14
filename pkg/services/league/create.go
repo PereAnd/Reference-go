@@ -10,7 +10,10 @@ import (
 	"github.com/jairogloz/go-l/pkg/domain"
 )
 
-// Create creates a new league.
+// Create crea una nueva liga en el sistema.
+// Establece el timestamp CreatedAt y delega la persistencia al repositorio.
+// Si ocurre un error de clave duplicada, retorna un AppError específico del dominio.
+// Cualquier otro error de persistencia es envuelto y retornado.
 func (s *Service) Create(ctx context.Context, league *domain.League) (err error) {
 	now := time.Now().UTC()
 	league.CreatedAt = &now

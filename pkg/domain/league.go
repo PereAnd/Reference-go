@@ -2,11 +2,11 @@ package domain
 
 import "time"
 
-// League reflects a sports league in our system.
-// A league can have one or more Tournaments, and a Tournament can have one or more
-// Editions, for instance, the League Golang League and have a Tournament called
-// Kids Tournament, and this Tournament can have an Edition called 2024 Edition,
-// then next year the same Tournament can have a new Edition called 2025 Edition.
+// League representa una liga deportiva en nuestro sistema.
+// Una liga puede tener uno o más Torneos, y un Torneo puede tener una o más
+// Ediciones, por ejemplo, la Liga Golang League puede tener un Torneo llamado
+// Kids Tournament, y este Torneo puede tener una Edición llamada 2024 Edition,
+// luego el próximo año el mismo Torneo puede tener una nueva Edición llamada 2025 Edition.
 type League struct {
 	CreatedAt   *time.Time  `json:"created_at" bson:"created_at"`
 	Description string      `json:"description" bson:"description"`

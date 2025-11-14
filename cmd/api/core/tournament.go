@@ -1,6 +1,6 @@
 package core
 
-// TournamentCreateParams is a struct that represents the parameters needed to create a tournament.
+// TournamentCreateParams es una estructura que representa los parámetros necesarios para crear un torneo.
 type TournamentCreateParams struct {
 	Description string `json:"description" binding:"required"`
 	Name        string `json:"name" binding:"required"`

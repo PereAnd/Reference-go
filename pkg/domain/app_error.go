@@ -21,13 +21,13 @@ var (
 	ErrTimeout      = errors.New("timeout error")
 )
 
-// AppError is a custom error type that implements the error interface
+// AppError es un tipo de error personalizado que implementa la interfaz error.
 type AppError struct {
 	Code string `json:"code"`
 	Msg  string `json:"msg"`
 }
 
-// NewAppError creates a new AppError with the given code and message.
+// NewAppError crea un nuevo AppError con el código y mensaje dados.
 func NewAppError(code string, msg string) AppError {
 	return AppError{
 		Code: code,
@@ -35,7 +35,7 @@ func NewAppError(code string, msg string) AppError {
 	}
 }
 
-// Error returns a string representation of the error. It is part of the error interface.
+// Error retorna una representación en cadena del error. Es parte de la interfaz error.
 func (e AppError) Error() string {
 	return fmt.Sprintf("%s: %s", e.Code, e.Msg)
 }
@@ -76,7 +76,7 @@ func ManageError(err error, msg string) error {
 		}
 	}
 
-	// We only add the custom message if the error is not an internal server error
+	// Solo agregamos el mensaje personalizado si el error no es un error interno del servidor
 	if msg != "" && appErr.Code != ErrCodeInternalServerError {
 		appErr.Msg = fmt.Sprintf("%s: %s", appErr.Msg, msg)
 	}

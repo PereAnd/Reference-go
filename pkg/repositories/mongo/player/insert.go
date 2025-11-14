@@ -10,6 +10,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+// Insert persiste un nuevo documento de jugador en la colección de MongoDB.
+// Genera un nuevo ObjectID para el jugador si no está establecido, luego inserta
+// el documento. Si ocurre un error de clave duplicada, retorna un error específico
+// del dominio ErrDuplicateKey. Otros errores son envueltos y retornados.
 func (r *Repository) Insert(ctx context.Context, player *domain.Player) (err error) {
 
 	player.ID = primitive.NewObjectID()

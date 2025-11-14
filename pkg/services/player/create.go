@@ -10,19 +10,25 @@ import (
 	"github.com/jairogloz/go-l/pkg/domain"
 )
 
-// Create is a method of the Service struct that creates a new player in the database.
+// Create es un método de la estructura Service que crea un nuevo jugador en la base de datos.
 //
-// Params:
-//   - player: A pointer to a domain.Player struct. This allows the method to modify the original Player struct.
+// Parámetros:
+//   - player: Un puntero a una estructura domain.Player. Esto permite al método modificar la estructura Player original.
 //
-// The method sets the CreatedAt field of the Player struct to the current time and then calls the Insert method of the Repo field of the Service struct, passing the Player struct as an argument.
+// El método establece el campo CreatedAt de la estructura Player a la hora actual y luego llama al método Insert
+// del campo Repo de la estructura Service, pasando la estructura Player como argumento.
 //
-// If the Insert method returns an error, the Create method checks if the error is a duplicate key error. If it is, it logs the error and returns a new AppError with the duplicate key error code and message. If the error is not a duplicate key error, it logs the error and returns a new error wrapping the original error with a message indicating that there was an error creating the player.
+// Si el método Insert retorna un error, el método Create verifica si el error es un error de clave duplicada.
+// Si lo es, registra el error y retorna un nuevo AppError con el código y mensaje de error de clave duplicada.
+// Si el error no es un error de clave duplicada, registra el error y retorna un nuevo error envolviendo el error
+// original con un mensaje indicando que hubo un error al crear el jugador.
 //
-// If the Insert method does not return an error, the Create method sets the ID field of the Player struct to the ID returned by the Insert method. This allows the caller of the Create method to access the ID of the newly created Player.
+// Si el método Insert no retorna un error, el método Create establece el campo ID de la estructura Player
+// al ID retornado por el método Insert. Esto permite al llamador del método Create acceder al ID del jugador recién creado.
 //
-// Return values:
-//   - err: An error that will be nil if the Player was successfully created. If there was an error, it will be an error object describing the failure.
+// Valores de retorno:
+//   - err: Un error que será nil si el jugador fue creado exitosamente. Si hubo un error, será un objeto de error
+//     describiendo el fallo.
 func (s *Service) Create(ctx context.Context, player *domain.Player) (err error) {
 	now := time.Now().UTC()
 	player.CreatedAt = &now

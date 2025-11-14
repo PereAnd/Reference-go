@@ -1,3 +1,16 @@
+// Package main es el punto de entrada de la aplicación GO-L.
+// Configura la inyección de dependencias, inicializa el servidor HTTP usando Gin,
+// y conecta todos los componentes siguiendo el patrón de arquitectura hexagonal.
+//
+// La estructura de la aplicación sigue estas capas:
+//   - Handlers (cmd/api/handlers): Adaptadores HTTP (puertos conductores/entrada)
+//   - Services (pkg/services): Lógica de negocio de la aplicación
+//   - Repositories (pkg/repositories): Adaptadores de persistencia de datos (puertos conducidos/salida)
+//   - Domain (pkg/domain): Entidades de negocio principales
+//   - Ports (pkg/ports): Contratos de interfaces
+//
+// Variables de entorno requeridas:
+//   - MONGO_URI: Cadena de conexión a MongoDB (ej., "mongodb://localhost:27017")
 package main
 
 import (
@@ -19,6 +32,18 @@ import (
 	tournamentService "github.com/jairogloz/go-l/pkg/services/tournament"
 )
 
+// main inicializa y arranca el servidor HTTP para la aplicación GO-L.
+// Realiza los siguientes pasos:
+//   1. Carga variables de entorno desde el archivo .env
+//   2. Establece conexión a MongoDB
+//   3. Inicializa repositorios (adaptadores MongoDB)
+//   4. Inicializa servicios (capa de aplicación)
+//   5. Inicializa manejadores HTTP (adaptadores HTTP)
+//   6. Configura rutas HTTP
+//   7. Inicia el servidor en el puerto 8001
+//
+// La inyección de dependencias sigue la arquitectura hexagonal:
+//   Repository -> Service -> Handler
 func main() {
 
 	err := godotenv.Load()

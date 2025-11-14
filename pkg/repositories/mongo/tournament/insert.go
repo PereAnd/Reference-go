@@ -11,7 +11,10 @@ import (
 	"github.com/jairogloz/go-l/pkg/domain"
 )
 
-// Insert inserts a new tournament into the database.
+// Insert persiste un nuevo documento de torneo en la colección de MongoDB.
+// Genera un nuevo ObjectID para el torneo si no está establecido, luego inserta
+// el documento. Si ocurre un error de clave duplicada, retorna un error específico
+// del dominio ErrDuplicateKey. Otros errores son envueltos y retornados.
 func (r *Repository) Insert(ctx context.Context, tournament *domain.Tournament) (err error) {
 	tournament.ID = primitive.NewObjectID()
 

@@ -9,12 +9,12 @@ import (
 	"github.com/jairogloz/go-l/pkg/domain"
 )
 
-// Get retrieves a player by their ID from the repository.
-// It returns a domain.Player object and an error.
-// If the provided ID is empty, it returns an error.
-// If the player is not found in the repository, it returns a domain-specific not found error.
-// If there is a timeout error when accessing the repository, it returns a domain-specific timeout error.
-// For any other errors, it logs the error and returns a generic error.
+// Get obtiene un jugador por su ID desde el repositorio.
+// Retorna un objeto domain.Player y un error.
+// Si el ID proporcionado está vacío, retorna un error.
+// Si el jugador no se encuentra en el repositorio, retorna un error específico del dominio de no encontrado.
+// Si hay un error de timeout al acceder al repositorio, retorna un error específico del dominio de timeout.
+// Para cualquier otro error, registra el error y retorna un error genérico.
 func (s *Service) Get(ctx context.Context, id string) (player *domain.Player, err error) {
 
 	if id == "" {

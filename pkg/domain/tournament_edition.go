@@ -8,14 +8,14 @@ const (
 	TournamentTypePlayoff = "playoff"  // playoff, Etapa regular seguido de playoff, ej. Mundial de la Fifa
 )
 
-// TournamentEdition reflects a sports tournament edition in our system.
-// An edition is a specific instance of a tournament, for instance, the League
-// Golang League can have a Tournament called Kids Tournament, and this Tournament
-// can have a TournamentEdition called 2024 Edition, then next year the same Tournament can
-// have a new TournamentEdition called 2025 Edition.
+// TournamentEdition representa una edición de torneo deportivo en nuestro sistema.
+// Una edición es una instancia específica de un torneo, por ejemplo, la Liga
+// Golang League puede tener un Torneo llamado Kids Tournament, y este Torneo
+// puede tener una TournamentEdition llamada 2024 Edition, luego el próximo año el mismo Torneo
+// puede tener una nueva TournamentEdition llamada 2025 Edition.
 //
-// A TournamentEdition can have multiple teams that participate in it, they might vary between
-// editions.
+// Una TournamentEdition puede tener múltiples equipos que participan en ella, pueden variar entre
+// ediciones.
 type TournamentEdition struct {
 	CreatedAt     *time.Time     `json:"created_at" bson:"created_at"`
 	Description   string         `json:"description" bson:"description"`

@@ -1,14 +1,15 @@
 package core
 
 import (
-	"github.com/jairogloz/go-l/pkg/domain"
 	"time"
+
+	"github.com/jairogloz/go-l/pkg/domain"
 )
 
-// TournamentEditionParams is a struct that represents the parameters needed to edit a tournament.
+// TournamentEditionParams es una estructura que representa los parámetros necesarios para editar un torneo.
 type TournamentEditionParams struct {
 	Description   string            `json:"description" binding:"required"`
-	EndDate       *time.Time        `json:"end_date"` // Should be a valid date in the future, after than StartDate.
+	EndDate       *time.Time        `json:"end_date"` // Debe ser una fecha válida en el futuro, después de StartDate.
 	GameDays      []time.Weekday    `json:"game_days" binding:"required"`
 	GameTimeRange *domain.TimeRange `json:"game_time_range" bson:"game_time_range"`
 	Name          string            `json:"name" binding:"required"`

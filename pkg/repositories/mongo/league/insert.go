@@ -11,7 +11,10 @@ import (
 	"github.com/jairogloz/go-l/pkg/domain"
 )
 
-// Insert inserts a new league into the database.
+// Insert persiste un nuevo documento de liga en la colección de MongoDB.
+// Genera un nuevo ObjectID para la liga si no está establecido, luego inserta
+// el documento. Si ocurre un error de clave duplicada, retorna un error específico
+// del dominio ErrDuplicateKey. Otros errores son envueltos y retornados.
 func (r *Repository) Insert(ctx context.Context, league *domain.League) (err error) {
 	league.ID = primitive.NewObjectID()
 

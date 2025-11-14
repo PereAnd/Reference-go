@@ -2,7 +2,7 @@ package core
 
 import "github.com/jairogloz/go-l/pkg/domain"
 
-// PlayerCreateParams is a struct that represents the parameters needed to create a player.
+// PlayerCreateParams es una estructura que representa los parámetros necesarios para crear un jugador.
 type PlayerCreateParams struct {
 	ContactInfo *domain.ContactInfo `json:"contact_info" `
 	DateOfBirth *domain.Date        `json:"date_of_birth" binding:"required"`

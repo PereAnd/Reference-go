@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// Delete deletes a team by id from db
+// Delete elimina un equipo por su ID de la base de datos.
 func (r Repository) Delete(ctx context.Context, id string) (err error) {
 
 	teamID, err := primitive.ObjectIDFromHex(id)

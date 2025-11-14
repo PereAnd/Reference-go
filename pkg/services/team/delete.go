@@ -6,8 +6,8 @@ import (
 	"github.com/jairogloz/go-l/pkg/domain"
 )
 
-// Delete removes a team from the repository.
-// It returns an error if the team does not exist or if there is an unexpected error.
+// Delete elimina un equipo del repositorio.
+// Retorna un error si el equipo no existe o si hay un error inesperado.
 func (s Service) Delete(ctx context.Context, id string) (err error) {
 
 	err = s.Repo.Delete(ctx, id)

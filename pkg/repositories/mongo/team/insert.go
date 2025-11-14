@@ -3,12 +3,17 @@ package team
 import (
 	"context"
 	"fmt"
+	"log"
+
 	"github.com/jairogloz/go-l/pkg/domain"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	"log"
 )
 
+// Insert persiste un nuevo documento de equipo en la colección de MongoDB.
+// Genera un nuevo ObjectID para el equipo si no está establecido, luego inserta
+// el documento. Si ocurre un error de clave duplicada, retorna un error específico
+// del dominio ErrDuplicateKey. Otros errores son envueltos y retornados.
 func (r *Repository) Insert(ctx context.Context, team *domain.Team) (err error) {
 	team.ID = primitive.NewObjectID()
 

@@ -14,7 +14,7 @@ var (
 	ErrDeleteLeague = errors.New("error deleting league")
 )
 
-// Delete deletes a league by id from the database
+// Delete elimina una liga por su ID de la base de datos.
 func (r *Repository) Delete(ctx context.Context, id string) (err error) {
 
 	leagueID, err := primitive.ObjectIDFromHex(id)
